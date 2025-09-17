@@ -62,11 +62,10 @@ OWNER_UPI_ID = environ.get('OWNER_UPI_ID', 'ftmdeveloperz@ybl')
 # ============================
 # MongoDB Configuration
 # ============================
-DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://ftm:ftm@cluster0.8hbsnml.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://ftm:ftm@cluster0.xotfi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DATABASE_NAME = environ.get('DATABASE_NAME', "Cluster0")
-COLLECTION_NAME = environ.get('COLLECTION_NAME', 'ftmbox')
-
+DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://xchetan:xchetan@cluster1.kq6qx2q.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1")
+DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://xchetan:xchetan@cluster0.kmqg03h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+DATABASE_NAME = environ.get('DATABASE_NAME', "meher")
+COLLECTION_NAME = environ.get('COLLECTION_NAME', 'meher')
 # ============================
 # Movie Notification & Update Settings
 # ============================
