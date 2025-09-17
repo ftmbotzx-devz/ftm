@@ -21,7 +21,7 @@ def is_enabled(value, default):
 SESSION = environ.get('SESSION', 'Media_search')
 API_ID = int(environ.get('API_ID', '22141398'))
 API_HASH = environ.get('API_HASH', '0c8f8bd171e05e42d6f6e5a6f4305389')
-BOT_TOKEN = environ.get('BOT_TOKEN', '7499369747:AAGBKc935GhqU80VGYrn3v9ysIB6nkc2DnU')
+BOT_TOKEN = environ.get('BOT_TOKEN', '8074994356:AAGPdqjly0DZrs3u3nnPty7HEefJAt8pu2I')
 
 # ============================
 # Bot Settings Configuration
@@ -39,25 +39,25 @@ FSUB_PICS = (environ.get('FSUB_PICS', 'https://graph.org/file/7478ff3eac37f4329c
 # ============================
 # Admin, Channels & Users Configuration
 # ============================
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '7744665378 ').split()] # Replace with the actual admin ID(s) to add
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002472427519').split()]  # Channel id for auto indexing (make sure bot is admin)
-LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002428720041'))  # Log channel id (make sure bot is admin)
-BIN_CHANNEL = int(environ.get('BIN_CHANNEL', '-1002291621486'))  # Bin channel id (make sure bot is admin)
-FTMBOTZX_MOVIE_UPDATE_CHANNEL = int(environ.get('FTMBOTZX_MOVIE_UPDATE_CHANNEL', '-1002289494546'))  # Notification of those who verify will be sent to your channel
-PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002428720041'))  # Premium logs channel id
-auth_channel = environ.get('AUTH_CHANNEL', '-1002087228619')  # Channel/Group ID for force sub (make sure bot is admin)
-DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002291621486').split()]
-support_chat_id = environ.get('SUPPORT_CHAT_ID', '1002282331890')  # Support group id (make sure bot is admin)
-reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002291621486')  # Request channel id (make sure bot is admin)
-AUTH_CHANNEL = [int(fch) if id_pattern.search(fch) else fch for fch in environ.get('AUTH_CHANNEL', '-1002087228619').split()]
-MULTI_FSUB = [int(channel_id) for channel_id in environ.get('MULTI_FSUB', '-1002087228619').split() if re.match(r'^-?\d+$', channel_id)]  # Channel for force sub (make sure bot is admin)
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6965488457 ').split()] # Replace with the actual admin ID(s) to add
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002904776479').split()]  # Channel id for auto indexing (make sure bot is admin)
+LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002120758420'))  # Log channel id (make sure bot is admin)
+BIN_CHANNEL = int(environ.get('BIN_CHANNEL', '-1002444552703'))  # Bin channel id (make sure bot is admin)
+FTMBOTZX_MOVIE_UPDATE_CHANNEL = int(environ.get('FTMBOTZX_MOVIE_UPDATE_CHANNEL', '-1002200226545'))  # Notification of those who verify will be sent to your channel
+PREMIUM_LOGS = int(environ.get('PREMIUM_LOGS', '-1002120758420'))  # Premium logs channel id
+auth_channel = environ.get('AUTH_CHANNEL', '-1002200226545')  # Channel/Group ID for force sub (make sure bot is admin)
+DELETE_CHANNELS = [int(dch) if id_pattern.search(dch) else dch for dch in environ.get('DELETE_CHANNELS', '-1002120758420').split()]
+support_chat_id = environ.get('SUPPORT_CHAT_ID', '1003088761353')  # Support group id (make sure bot is admin)
+reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002444552703')  # Request channel id (make sure bot is admin)
+AUTH_CHANNEL = [int(fch) if id_pattern.search(fch) else fch for fch in environ.get('AUTH_CHANNEL', '-1002926855756').split()]
+MULTI_FSUB = [int(channel_id) for channel_id in environ.get('MULTI_FSUB', '').split() if re.match(r'^-?\d+$', channel_id)]  # Channel for force sub (make sure bot is admin)
 
 
 # ============================
 # Payment Configuration
 # ============================
-QR_CODE = environ.get('QR_CODE', 'https://telegra.ph/file/d1f7812a3d36a179381e5.jpg')
-OWNER_UPI_ID = environ.get('OWNER_UPI_ID', 'ftmdeveloperz@ybl')
+QR_CODE = environ.get('QR_CODE', 'https://envs.sh/Z_a.jpg')
+OWNER_UPI_ID = environ.get('OWNER_UPI_ID', '8504021912@slc')
 
 # ============================
 # MongoDB Configuration
@@ -66,11 +66,12 @@ DATABASE_URI = environ.get('DATABASE_URI', "mongodb+srv://xchetan:xchetan@cluste
 DATABASE_URI2 = environ.get('DATABASE_URI2', "mongodb+srv://xchetan:xchetan@cluster0.kmqg03h.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DATABASE_NAME = environ.get('DATABASE_NAME', "meher")
 COLLECTION_NAME = environ.get('COLLECTION_NAME', 'meher')
+
 # ============================
 # Movie Notification & Update Settings
 # ============================
-FTMBOTZX_MOVIE_UPDATE_NOTIFICATION = bool(environ.get('FTMBOTZX_MOVIE_UPDATE_NOTIFICATION', True))  # Notification On (True) / Off (False)
-FTMBOTZX_IMAGE_FETCH = bool(environ.get('FTMBOTZX_IMAGE_FETCH', True))  # On (True) / Off (False)
+FTMBOTZX_MOVIE_UPDATE_NOTIFICATION = bool(environ.get('FTMBOTZX_MOVIE_UPDATE_NOTIFICATION', False))  # Notification On (True) / Off (False)
+FTMBOTZX_IMAGE_FETCH = bool(environ.get('FTMBOTZX_IMAGE_FETCH', False))  # On (True) / Off (False)
 CAPTION_LANGUAGES = ["Bhojpuri", "Hindi", "Bengali", "Tamil", "English", "Bangla", "Telugu", "Malayalam", "Kannada", "Marathi", "Punjabi", "Bengoli", "Gujrati", "Korean", "Gujarati", "Spanish", "French", "German", "Chinese", "Arabic", "Portuguese", "Russian", "Japanese", "Odia", "Assamese", "Urdu"]
 
 # ============================
@@ -78,7 +79,7 @@ CAPTION_LANGUAGES = ["Bhojpuri", "Hindi", "Bengali", "Tamil", "English", "Bangla
 # ============================
 VERIFY = bool(environ.get('VERIFY', False))  # Verification On (True) / Off (False)
 FTMBOTZX_VERIFY_EXPIRE = int(environ.get('FTMBOTZX_VERIFY_EXPIRE', 48))  # Add time in hours
-FTMBOTZX_VERIFIED_LOG = int(environ.get('FTMBOTZX_VERIFIED_LOG', '-1002428720041'))  # Log channel id (make sure bot is admin)
+FTMBOTZX_VERIFIED_LOG = int(environ.get('FTMBOTZX_VERIFIED_LOG', '-1002120758420'))  # Log channel id (make sure bot is admin)
 HOW_TO_VERIFY = environ.get('HOW_TO_VERIFY', 'https://t.me/ftmbotzx/2')  # How to open tutorial link for verification
 
 # ============================
@@ -88,23 +89,23 @@ IS_SHORTLINK = bool(environ.get('IS_SHORTLINK', False))
 SHORTLINK_URL = environ.get('SHORTLINK_URL', 'modijiurl.com')
 SHORTLINK_API = environ.get('SHORTLINK_API', '79a8621baf4ba2a396eed551eb5d89634d64998f')
 TUTORIAL = environ.get('TUTORIAL', 'https://t.me/ftmbotzx/2')  # Tutorial video link for opening shortlink website
-IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', True))
+IS_TUTORIAL = bool(environ.get('IS_TUTORIAL', False))
 
 # ============================
 # Channel & Group Links Configuration
 # ============================
-GRP_LNK = environ.get('GRP_LNK', 'https://t.me/ftmbotzx_support')
-CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/ftmmovieskiduniya')
-OWNER_LNK = environ.get('OWNER_LNK', 'https://t.me/ftmdeveloperz')
-FTMBOTZX_MOVIE_UPDATE_CHANNEL_LNK = environ.get('FTMBOTZX_MOVIE_UPDATE_CHANNEL_LNK', 'https://t.me/ftmmovieskiduniya')
-OWNERID = int(os.environ.get('OWNERID', '7744665378'))  # Replace with the actual admin ID
+GRP_LNK = environ.get('GRP_LNK', 'https://t.me/movie_hd_hub15')
+CHNL_LNK = environ.get('CHNL_LNK', 'https://t.me/+tgPf04FXMOllMWVl')
+OWNER_LNK = environ.get('OWNER_LNK', '@Hidden_Xman')
+FTMBOTZX_MOVIE_UPDATE_CHANNEL_LNK = environ.get('FTMBOTZX_MOVIE_UPDATE_CHANNEL_LNK', 'https://t.me/+tgPf04FXMOllMWVl')
+OWNERID = int(os.environ.get('OWNERID', '6965488457'))  # Replace with the actual admin ID
 
 # ============================
 # User Configuration
 # ============================
-auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '7979969878').split()]
+auth_users = [int(user) if id_pattern.search(user) else user for user in environ.get('AUTH_USERS', '').split()]
 AUTH_USERS = (auth_users + ADMINS) if auth_users else []
-PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '7979969878').split()]
+PREMIUM_USER = [int(user) if id_pattern.search(user) else user for user in environ.get('PREMIUM_USER', '').split()]
 
 # ============================
 # Miscellaneous Configuration
@@ -113,8 +114,8 @@ NO_RESULTS_MSG = bool(environ.get("NO_RESULTS_MSG", True))  # True if you want n
 MAX_B_TN = environ.get("MAX_B_TN", "8")
 MAX_BTN = is_enabled((environ.get('MAX_BTN', "True")), True)
 PORT = environ.get("PORT", "8080")
-MSG_ALRT = environ.get('MSG_ALRT', 'Made with love 😘 by @FᴛᴍDᴇᴠᴇʟᴏᴘᴇʀᴢ . Share & Support Us ♥️')
-SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'https://t.me/ftmbotzx_support')  # Support group link (make sure bot is admin)
+MSG_ALRT = environ.get('MSG_ALRT', 'Made with love 😘 by @Hidden_Xman . Share & Support Us ♥️')
+SUPPORT_CHAT = environ.get('SUPPORT_CHAT', 'https://t.me/Movie2u_in')  # Support group link (make sure bot is admin)
 P_TTI_SHOW_OFF = is_enabled((environ.get('P_TTI_SHOW_OFF', "True")), True)
 IMDB = is_enabled((environ.get('IMDB', "True")), True)
 AUTO_FFILTER = is_enabled((environ.get('AUTO_FFILTER', "True")), True)
@@ -128,17 +129,17 @@ LONG_IMDB_DESCRIPTION = is_enabled(environ.get("LONG_IMDB_DESCRIPTION", "True"),
 SPELL_CHECK_REPLY = is_enabled(environ.get("SPELL_CHECK_REPLY", "True"), True)
 MAX_LIST_ELM = environ.get("MAX_LIST_ELM", None)
 INDEX_REQ_CHANNEL = int(environ.get('INDEX_REQ_CHANNEL', LOG_CHANNEL))
-FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '-1002408031025')).split()]
+FILE_STORE_CHANNEL = [int(ch) for ch in (environ.get('FILE_STORE_CHANNEL', '')).split()]
 MELCOW_NEW_USERS = is_enabled((environ.get('MELCOW_NEW_USERS', "True")), True)
 PROTECT_CONTENT = is_enabled((environ.get('PROTECT_CONTENT', "False")), False)
-PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "True")), True)
+PUBLIC_FILE_STORE = is_enabled((environ.get('PUBLIC_FILE_STORE', "False")), True)
 PM_SEARCH = bool(environ.get('PM_SEARCH', True))  # PM Search On (True) / Off (False)
 EMOJI_MODE = bool(environ.get('EMOJI_MODE', True))  # Emoji status On (True) / Off (False)
 
 # ============================
 # Bot Configuration
 # ============================
-auth_grp = environ.get('AUTH_GROUP', '-1002282331890')
+auth_grp = environ.get('AUTH_GROUP', '-1003088761353')
 AUTH_CHANNEL = int(auth_channel) if auth_channel and id_pattern.search(auth_channel) else None
 AUTH_GROUPS = [int(ch) for ch in auth_grp.split()] if auth_grp else None
 REQST_CHANNEL = int(reqst_channel) if reqst_channel and id_pattern.search(reqst_channel) else None
@@ -151,7 +152,7 @@ SEASONS = ["season 1" , "season 2" , "season 3" , "season 4", "season 5" , "seas
 # Server & Web Configuration
 # ============================
 
-STREAM_MODE = bool(environ.get('STREAM_MODE', True)) # Set Stream mode True or False
+STREAM_MODE = bool(environ.get('STREAM_MODE', False)) # Set Stream mode True or False
 
 NO_PORT = bool(environ.get('NO_PORT', False))
 APP_NAME = None
@@ -188,7 +189,7 @@ REACTIONS = ["❤️", "🔥", "😍", "😂", "😮", "😢", "😡", "👍", "
 # ============================
 # FTM Gamma Mode Configuration
 # ============================
-FTM_GAMMA_MODE = bool(environ.get('FTM_GAMMA_MODE', False))  # Default disabled
+FTM_GAMMA_MODE = bool(environ.get('FTM_GAMMA_MODE', True))  # Default disabled
 
 
 
