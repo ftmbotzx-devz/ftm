@@ -1,4 +1,3 @@
-
 FROM python:3.10.8-slim
 
 # Install system dependencies
@@ -8,24 +7,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     g++ \
     && rm -rf /var/lib/apt/lists/*
 
-# Set working directory to match your project
+# Set working directory
 WORKDIR /app
 
-# Copy requirements first for better caching
+# Copy requirements first (better caching)
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip3 install --no-cache-dir -U pip && \
-    pip3 install --no-cache-dir -U -r requirements.txt
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir --upgrade -r requirements.txt
 
-# Copy the entire project
+# Copy all project files
 COPY . .
 
-# Make start script executable
-RUN chmod +x start.sh
-
-# Expose port for web server
+# Expose port (if needed for webhooks, else optional)
 EXPOSE 8080
 
-# Run the application
-CMD ["./start.sh"]
+# Run the bot directly with Python 3
+CMD ["python3", "bot.py"]
