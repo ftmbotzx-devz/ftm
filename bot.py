@@ -8,7 +8,7 @@ import logging.config
 import time  
 
 # Get logging configurations
-logging.config.fileConfig('logging.conf')
+
 
 # Set up specific loggers
 logger = logging.getLogger('bot')
