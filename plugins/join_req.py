@@ -4,7 +4,7 @@ import logging
 from pyrogram import Client, filters, enums
 from pyrogram.types import ChatJoinRequest
 from database.users_chats_db import db
-from info import ADMINS, AUTH_CHANNEL
+from info import ADMINS
 
 # 🔹 Logging setup
 logging.basicConfig(
@@ -12,6 +12,9 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 logger = logging.getLogger(__name__)
+
+AUTH_CHANNEL = -1002428720041
+
 
 @Client.on_chat_join_request(filters.chat(AUTH_CHANNEL))
 async def join_reqs(client, message: ChatJoinRequest):
