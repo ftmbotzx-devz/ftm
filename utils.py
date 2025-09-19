@@ -85,6 +85,8 @@ async def is_subscribed(bot, query, channels):
         except UserNotParticipant:
             try:
                 if link_type == "request":
+                    if await db.find_join_req(query.from_user.id):
+                        continue  
                     invite = await bot.create_chat_invite_link(
                         chat_id=channel_id,
                         creates_join_request=True,
