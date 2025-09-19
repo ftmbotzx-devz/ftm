@@ -1,10 +1,10 @@
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
-from info import  LONG_IMDB_DESCRIPTION, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION, FTMBOTZX_VERIFY_EXPIRE, AUTH_CHANNEL
+from info import  LONG_IMDB_DESCRIPTION, MAGIC_FORCE_SUB, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION, FTMBOTZX_VERIFY_EXPIRE, AUTH_CHANNEL
 from imdb import Cinemagoer 
 import asyncio
 from pyrogram.types import Message, InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
+from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid, UserNotParticipant
 from pyrogram import enums
 from typing import Union
 from Script import script
@@ -22,6 +22,7 @@ import aiohttp
 from shortzy import Shortzy
 import http.client
 import json
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -75,17 +76,35 @@ async def is_req_subscribed(bot, query):
 
 async def is_subscribed(bot, query, channels):
     btn = []
-    for channel_id in channels:
+    for channel_id, link_type in MAGIC_FORCE_SUB.items():
         try:
-            chat = await bot.get_chat(int(channel_id))
+            chat = await bot.get_chat(channel_id)
             await bot.get_chat_member(channel_id, query.from_user.id)
+
         except UserNotParticipant:
-            btn.append(
-                [InlineKeyboardButton(f'❤️ {chat.title}', url=chat.invite_link)]
-            )
-        except Exception as e:
+            try:
+                if link_type == "request":
+                    invite = await bot.create_chat_invite_link(
+                        chat_id=channel_id,
+                        creates_join_request=True,
+                        name=f"ForceSub-{query.from_user.id}"
+                    )
+                    link = invite.invite_link
+                else:
+                    if not chat.invite_link:
+                        chat = await bot.get_chat(channel_id)
+                    link = chat.invite_link
+
+                btn.append(
+                    [InlineKeyboardButton(f'❤️ Join {chat.title}', url=link)]
+                )
+
+            except Exception as e:
+                pass
+        except Exception:
             pass
     return btn
+
 
 async def is_check_admin(bot, chat_id, user_id):
     try:
