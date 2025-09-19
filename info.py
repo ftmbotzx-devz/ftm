@@ -190,8 +190,13 @@ REACTIONS = ["❤️", "🔥", "😍", "😂", "😮", "😢", "😡", "👍", "
 # ============================
 # FTM Gamma Mode Configuration
 # ============================
-FTM_GAMMA_MODE = bool(environ.get('FTM_GAMMA_MODE', True))  # Default disabled
+FTM_GAMMA_MODE = bool(environ.get('FTM_GAMMA_MODE', True))
 
+  
+MAGIC_FORCE_SUB = {
+    -1002200226545: "normal",
+    -1002926855756: "request"
+}
 
 
 # ============================
