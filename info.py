@@ -3,7 +3,6 @@ import os
 from os import environ, getenv
 from Script import script
 
-# Utility functions
 id_pattern = re.compile(r'^.\d+$')
 
 def is_enabled(value, default):
@@ -29,7 +28,7 @@ BOT_TOKEN = environ.get('BOT_TOKEN', '8074994356:AAGPdqjly0DZrs3u3nnPty7HEefJAt8
 CACHE_TIME = int(environ.get('CACHE_TIME', 300))
 USE_CAPTION_FILTER = bool(environ.get('USE_CAPTION_FILTER', True))
 
-PICS = (environ.get('PICS', 'https://envs.sh/mG1.jpg')).split()  # Sample pic
+PICS = (environ.get('PICS', 'https://envs.sh/mG1.jpg')).split()
 NOR_IMG = environ.get("NOR_IMG", "https://graph.org/file/e20b5fdaf217252964202.jpg")
 MELCOW_VID = environ.get("MELCOW_VID", "https://graph.org/file/60e8a622b14796e4448ce.mp4")
 SPELL_IMG = environ.get("SPELL_IMG", "https://graph.org/file/13702ae26fb05df52667c.jpg")
@@ -39,8 +38,8 @@ FSUB_PICS = (environ.get('FSUB_PICS', 'https://graph.org/file/7478ff3eac37f4329c
 # ============================
 # Admin, Channels & Users Configuration
 # ============================
-ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6965488457 ').split()] # Replace with the actual admin ID(s) to add
-CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002904776479').split()]  # Channel id for auto indexing (make sure bot is admin)
+ADMINS = [int(admin) if id_pattern.search(admin) else admin for admin in environ.get('ADMINS', '6965488457 ').split()]
+CHANNELS = [int(ch) if id_pattern.search(ch) else ch for ch in environ.get('CHANNELS', '-1002904776479').split()]
 LOG_CHANNEL = int(environ.get('LOG_CHANNEL', '-1002120758420'))  # Log channel id (make sure bot is admin)
 BIN_CHANNEL = int(environ.get('BIN_CHANNEL', '-1002444552703'))  # Bin channel id (make sure bot is admin)
 FTMBOTZX_MOVIE_UPDATE_CHANNEL = int(environ.get('FTMBOTZX_MOVIE_UPDATE_CHANNEL', '-1002200226545'))  # Notification of those who verify will be sent to your channel
@@ -51,6 +50,12 @@ support_chat_id = environ.get('SUPPORT_CHAT_ID', '1003088761353')  # Support gro
 reqst_channel = environ.get('REQST_CHANNEL_ID', '-1002444552703')  # Request channel id (make sure bot is admin)
 AUTH_CHANNEL = [int(fch) if id_pattern.search(fch) else fch for fch in environ.get('AUTH_CHANNEL', '-1002926855756').split()]
 MULTI_FSUB = [int(channel_id) for channel_id in environ.get('MULTI_FSUB', '-1002200226545 -1002926855756').split() if re.match(r'^-?\d+$', channel_id)]  # Channel for force sub (make sure bot is admin)
+
+MAGIC_FORCE_SUB = {
+    -1002200226545: "normal",
+    -1002926855756: "request"
+}
+
 
 
 # ============================
@@ -193,10 +198,6 @@ REACTIONS = ["❤️", "🔥", "😍", "😂", "😮", "😢", "😡", "👍", "
 FTM_GAMMA_MODE = bool(environ.get('FTM_GAMMA_MODE', True))
 
   
-MAGIC_FORCE_SUB = {
-    -1002200226545: "normal",
-    -1002926855756: "request"
-}
 
 
 # ============================
