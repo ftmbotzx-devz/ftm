@@ -1,3 +1,4 @@
+#Don't Remove Credit @Ans_Bots
 import logging
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
 from info import  LONG_IMDB_DESCRIPTION, MAGIC_FORCE_SUB, MAX_LIST_ELM, SHORTLINK_URL, SHORTLINK_API, IS_SHORTLINK, LOG_CHANNEL, TUTORIAL, GRP_LNK, CHNL_LNK, CUSTOM_FILE_CAPTION, FTMBOTZX_VERIFY_EXPIRE, AUTH_CHANNEL
