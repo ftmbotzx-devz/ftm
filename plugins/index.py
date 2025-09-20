@@ -164,11 +164,12 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
         try:
             temp.CANCEL = False
 
-            # Get latest message (upper bound)
-            last_msg = await bot.get_history(chat_id=chat, limit=1)
-            if not last_msg:
-                return await msg.edit("No messages found in this chat.")
-            max_msg_id = last_msg[0].id
+            # Pyrogram compatible: get "latest" message by using very high message_id
+            try:
+                last_message = await bot.get_messages(chat_id=chat, message_ids=1_000_000_000)
+                max_msg_id = last_message.id
+            except Exception:
+                max_msg_id = lst_msg_id + 1000  # fallback if cannot fetch latest
 
             message_id = lst_msg_id
 
@@ -225,6 +226,7 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                         unsupported += 1
                         continue
 
+                    # Safe media check
                     if message.video:
                         media = message.video
                     elif message.document:
