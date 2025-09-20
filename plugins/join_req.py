@@ -13,7 +13,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-AUTH_CHANNEL = -1002428720041
+AUTH_CHANNEL = -1002926855756
 
 
 @Client.on_chat_join_request(filters.chat(AUTH_CHANNEL))
