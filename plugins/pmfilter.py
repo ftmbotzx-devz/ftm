@@ -36,10 +36,6 @@ import logging
 from urllib.parse import quote_plus
 from util.file_properties import get_name, get_hash, get_media_file_size
 from database.config_db import mdb
-from info import FSUB_PICS
-from pyrogram import enums
-import random
-
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.ERROR)
 
@@ -82,49 +78,15 @@ async def get_shortlink(url):
     loop = asyncio.get_event_loop()
     return await loop.run_in_executor(None, get_shortlink_sync, url)
 
-
-
 @Client.on_message(filters.group & filters.text & filters.incoming)
 async def give_filter(client, message):
-    
-    if not await db.has_premium_access(message.from_user.id):
-        channels = (await get_settings(int(message.chat.id))).get('fsub')
-        if channels:
-            btn = await is_subscribed(client, message, channels)
-            if btn:
-                try:
-                    kk, file_id = message.text.split("_", 1)
-                except ValueError:
-                    kk = "search"
-                    file_id = message.text
-                
-                btn.append([
-                    InlineKeyboardButton("♻️ ᴛʀʏ ᴀɢᴀɪɴ ♻️", callback_data=f"checksub#{kk}#{file_id}")
-                ])
-                
-                reply_markup = InlineKeyboardMarkup(btn)
-                caption = (
-                    f"👋 Hello {message.from_user.mention}\n\n"
-                    "Yᴏᴜ ʜᴀᴠᴇ ɴᴏᴛ Jᴏɪɴᴇᴅ ᴀʟʟ ᴏᴜʀ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟs.\n"
-                    "Pʟᴇᴀsᴇ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ **Jᴏɪɴ Uᴘᴅᴀᴛᴇs Cʜᴀɴɴᴇʟs** ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴀɴᴅ ᴍᴀᴋᴇ sᴜʀᴇ ᴛᴏ ᴊᴏɪɴ **ᴀʟʟ** ᴄʜᴀɴɴᴇʟs ʟɪsᴛᴇᴅ.\n\n"
-                    "इसके बाद आप फिर से ᴛʀʏ करें।.."
-                )
-                await message.reply_photo(
-                    photo=random.choice(FSUB_PICS),
-                    caption=caption,
-                    reply_markup=reply_markup,
-                    parse_mode=enums.ParseMode.HTML
-                )
-                return
-  
     if EMOJI_MODE:
         try:
             await message.react(emoji=random.choice(REACTIONS), big=True)
         except Exception as e:
             logger.error(f"Failed to react to message: {e}")
-
+            pass
     await mdb.update_top_messages(message.from_user.id, message.text)
-
     if message.chat.id != SUPPORT_CHAT_ID:
         manual = await manual_filters(client, message)
         if manual == False:
@@ -137,26 +99,15 @@ async def give_filter(client, message):
                 await save_group_settings(grpid, 'auto_ffilter', True)
                 settings = await get_settings(message.chat.id)
                 if settings['auto_ffilter']:
-                    await auto_filter(client, message)
-    else:
+                    await auto_filter(client, message) 
+    else: #a better logic to avoid repeated lines of code in auto_filter function
         search = message.text
-        temp_files, temp_offset, total_results = await get_search_results(
-            chat_id=message.chat.id,
-            query=search.lower(),
-            offset=0,
-            filter=True
-        )
-        if total_results > 0:
-            await message.reply_text(
-                f"<b>Hᴇʏ {message.from_user.mention},\n\nʏᴏᴜʀ ʀᴇǫᴜᴇsᴛ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴀᴠᴀɪʟᴀʙʟᴇ ✅\n\n"
-                f"📂 ꜰɪʟᴇꜱ ꜰᴏᴜɴᴅ : {str(total_results)}\n"
-                f"🔍 ꜱᴇᴀʀᴄʜ :</b> <code>{search}</code>\n\n"
-                f"<b>‼️ ᴛʜɪs ɪs ᴀ <u>sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</u>...</b>",
-                reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton("🔍 ᴊᴏɪɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ 🔎", url=GRP_LNK)]]
-                )
-            )
-
+        temp_files, temp_offset, total_results = await get_search_results(chat_id=message.chat.id, query=search.lower(), offset=0, filter=True)
+        if total_results == 0:
+            return
+        else:
+            return await message.reply_text(f"<b>Hᴇʏ {message.from_user.mention},\n\nʏᴏᴜʀ ʀᴇǫᴜᴇsᴛ ɪꜱ ᴀʟʀᴇᴀᴅʏ ᴀᴠᴀɪʟᴀʙʟᴇ ✅\n\n📂 ꜰɪʟᴇꜱ ꜰᴏᴜɴᴅ : {str(total_results)}\n🔍 ꜱᴇᴀʀᴄʜ :</b> <code>{search}</code>\n\n<b>‼️ ᴛʜɪs ɪs ᴀ <u>sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ</u> sᴏ ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ'ᴛ ɢᴇᴛ ғɪʟᴇs ғʀᴏᴍ ʜᴇʀᴇ...\n\n📝 ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ : 👇</b>",   
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("🔍 ᴊᴏɪɴ ᴀɴᴅ ꜱᴇᴀʀᴄʜ ʜᴇʀᴇ 🔎", url=GRP_LNK)]]))
 
 @Client.on_message(filters.private & filters.text & filters.incoming)
 async def pm_text(bot, message):
