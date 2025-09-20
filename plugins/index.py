@@ -128,8 +128,9 @@ async def set_skip_number(bot, message):
             skip = int(skip)
         except:
             return await message.reply("Skip number should be an integer.")
-        await message.reply(f"Successfully set SKIP number as {skip}")
         temp.CURRENT = int(skip)
+        logger.info(f"🔧 SETSKIP: Updated temp.CURRENT to {temp.CURRENT}")
+        await message.reply(f"Successfully set SKIP number as {skip}\nNext indexing will start from message ID {skip}")
     else:
         await message.reply("Give me a skip number")
 
@@ -148,8 +149,9 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
             temp.CANCEL = False
 
             # Use individual message fetching for bot compatibility
-            message_id = 1  # Start from message ID 1
+            message_id = temp.CURRENT  # Start from skip number set by /setskip command
             processed_count = 0
+            logger.info(f"🚀 INDEXING: Starting indexing from message ID {message_id} (temp.CURRENT = {temp.CURRENT})")
 
             while message_id <= lst_msg_id:
                 if temp.CANCEL:
@@ -167,8 +169,8 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                     # Update progress every 80 messages
                     if current % 80 == 0:
                         try:
-                            # Calculate progress percentage
-                            progress_percent = round((current / lst_msg_id) * 100, 1)
+                            # Calculate progress percentage based on actual message IDs
+                            progress_percent = round((message_id / lst_msg_id) * 100, 1)
                             progress_bar = "█" * int(progress_percent // 5) + "░" * (20 - int(progress_percent // 5))
                             
                             can = [[InlineKeyboardButton('Cancel', callback_data='index_cancel')]]
@@ -177,7 +179,8 @@ async def index_files_to_db(lst_msg_id, chat, msg, bot):
                             progress_text = (
                                 f"📊 **Indexing Progress: {progress_percent}%**\n"
                                 f"[{progress_bar}]\n\n"
-                                f"📁 **Messages Processed:** {current}/{lst_msg_id}\n"
+                                f"📁 **Current Message ID:** {message_id}/{lst_msg_id}\n"
+                                f"🚀 **Started from:** {temp.CURRENT}\n"
                                 f"💾 **Files Saved:** <code>{total_files}</code>\n"
                                 f"🔄 **Duplicates Skipped:** <code>{duplicate}</code>\n"
                                 f"🗑️ **Deleted Messages:** <code>{deleted}</code>\n" 
